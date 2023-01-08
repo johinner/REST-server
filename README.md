@@ -1,3 +1,3 @@
 # WedServer + RestServer
 
-`Ejecutar npom install`
+`Ejecutar npm install`
