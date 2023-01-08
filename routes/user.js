@@ -1,3 +1,5 @@
+const { body } = require("express-validator");
+
 const { Router } = require("express"),
   router = Router();
 
@@ -12,7 +14,17 @@ router.get("/", usuariosGet);
 
 router.put("/:id", usuariosPut);
 
-router.post("/", usuariosPost);
+router.post(
+  "/",
+  [
+    body("name", "El nombre  es obligatorio").not().isEmpty(),
+    body("password", "la contrase;a de mas de 6 caracteres").isLength({
+      min: 6,
+    }),
+    body("email", "El correo no es valido").isEmail(),
+  ],
+  usuariosPost
+);
 
 router.delete("/", usuariosDelete);
 
