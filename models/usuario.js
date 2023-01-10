@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { use } = require("../routes/user");
 
 const UsuarioSchema = Schema({
   name: {
@@ -32,4 +33,8 @@ const UsuarioSchema = Schema({
   },
 });
 
+UsuarioSchema.methods.toJSON = function () {
+  const { __v, password, ...usuario } = this.toObject();
+  return usuario;
+};
 module.exports = model("Usuario", UsuarioSchema);
